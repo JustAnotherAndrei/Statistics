@@ -8,7 +8,7 @@ generate_random_permutation <- function(n)
   return(permutation)
 }
 
-set.seed(42)  
+set.seed(91)  
 print(generate_random_permutation(5))
 
 
@@ -49,7 +49,7 @@ print(compare_lexicographic(Wi, Wj))
 
 
 #c)
-randomized_quick_sort <- function(words)
+random_quick_sort <- function(words)
 {
   if (length(words) <= 1) 
   {
@@ -60,11 +60,11 @@ randomized_quick_sort <- function(words)
   equal <- words[sapply(words, function(x) x == pivot)]
   greater <- words[sapply(words, function(x) compare_lexicographic(pivot, x))]
   
-  return(c(randomized_quick_sort(less), equal, randomized_quick_sort(greater)))
+  return(c(random_quick_sort(less), equal, random_quick_sort(greater)))
 }
 
 words <- c("101", "100", "111", "010", "001")
-sorted_words <- randomized_quick_sort(words)
+sorted_words <- random_quick_sort(words)
 print(sorted_words)
 
 
@@ -72,7 +72,7 @@ print(sorted_words)
 generate_random_permutation_words <- function(n, k)
 {
   words <- replicate(n, paste0(sample(c("0", "1"), k, replace = TRUE), collapse = ""))
-  sorted_indices <- order(randomized_quick_sort(words))
+  sorted_indices <- order(random_quick_sort(words))
   return(sorted_indices)
 }
 
@@ -100,7 +100,7 @@ determine_cut <- function(nodes, edges)
   return(nrow(cut_edges))
 }
 
-set.seed(42)  
+set.seed(68)  
 V <- 1:7
 E <- matrix(c(1,2, 1,3, 2,4, 3,4, 4,5, 5,6, 5,7, 6,7), ncol=2, byrow=TRUE)
 max_cut_cardinality <- determine_cut(V, E)
