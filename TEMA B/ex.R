@@ -1,6 +1,7 @@
 #EX B1
 
-estimate_torus_volume <- function(R, r, num_samples) {
+estimate_torus_volume <- function(R, r, num_samples) 
+{
 
   x1 <- runif(num_samples, -R, R)
   x2 <- runif(num_samples, -R, R)
@@ -30,7 +31,8 @@ results <- data.frame(
   Relative_Error = numeric()
 )
 
-for (num_samples in sample_sizes) {
+for (num_samples in sample_sizes)
+{
   estimated_volume <- estimate_torus_volume(R, r, num_samples)
   relative_error <- abs(estimated_volume - exact_volume) / exact_volume
   results <- rbind(results, data.frame(Sample_Size = num_samples, Estimated_Volume = estimated_volume, Relative_Error = relative_error))
@@ -44,7 +46,8 @@ print(results)
 
 
 
-estimate_triangle_area <- function(num_samples) {
+estimate_triangle_area <- function(num_samples)
+{
   
   a <- 0
   b <- 2
@@ -77,7 +80,8 @@ cat("Aria estimata a triunghiului e:", estimated_area, "\n")
 
 #a)
 
-f_a <- function(x) {
+f_a <- function(x)
+{
   (2*x - 1) / (x^2 - x - 6)
 }
 
@@ -87,7 +91,8 @@ cat("Valoarea exacta a integralei (a) e:", log(3) - log(2), "\n")
 
 #b)
 
-f_b <- function(x) {
+f_b <- function(x)
+{
   (x + 4) / (x - 3)^(1/3)
 }
 
@@ -97,7 +102,8 @@ cat("Valoarea exacta a integralei (b) e: 68.8\n")
 
 #c)
 
-f_c <- function(x) {
+f_c <- function(x) 
+{
   x * exp(-x^2)
 }
 
@@ -115,11 +121,13 @@ p <- 0.25
 q <- 0.01
 
 
-simulate_years_until_target <- function(initial_users, n, p, q, target_users) {
+simulate_years_until_target <- function(initial_users, n, p, q, target_users)
+{
   years <- 0
   current_users <- initial_users
   
-  while (current_users < target_users) {
+  while (current_users < target_users) 
+  {
     new_users <- rbinom(1, n, p)
     retained_users <- rbinom(1, current_users, 1 - q)
     current_users <- retained_users + new_users
@@ -133,4 +141,4 @@ set.seed(123) #pt reproductibilitate
 years_to_target <- replicate(num_simulations, simulate_years_until_target(initial_users, n, p, q, target_users))
 
 mean_years <- mean(years_until_target)
-cat("Nr mediu de ani pana la atingerea targetului de 15000 de utilizatori:", mean_years, "\n")
+cat("Nr mediu de ani pana la atingerea targetului de 15000 de utilizatori e:", mean_years, "\n")
