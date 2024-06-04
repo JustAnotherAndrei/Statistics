@@ -55,20 +55,20 @@ plot_probabilities(lambda, p, n, m, k)
 {
   prag <- 1 - 10^(-6)
   prob_cumulata <- 0
-  k0 <- 0
+  k <- 0
   
-  while (cum_prob_cumulata <= threshold) 
+  while (cum_prob_cumulata <= prag) 
   {
-    prob_cumulata <- ppois(k0, lambda)
-    k0 <- k0 + 1
+    prob_cumulata <- ppois(k, lambda)
+    k <- k + 1
   }
   
   return(k0 - 1)  
 }
 
 # Exemplu de utilizare
-k0 <- find_k0(lambda)
-print(k0)
+k <- fin(lambda)
+print(k)
 
 
 
@@ -101,6 +101,7 @@ print(results)
 
 
 #b)
+
 remove_outliers_and_plot <- function(file_path, sample_name) 
 {
   data <- read.table(file_path, header = TRUE)
@@ -112,7 +113,7 @@ remove_outliers_and_plot <- function(file_path, sample_name)
   
   sample <- data[[sample_name]]
   
-  # determinam valorile inutile folosind metoda Interquartile Randge (IQR)
+  # determinam valorile inutile folosind metoda Interquantile Randge (IQR)
   Q1 <- quantile(sample, 0.25)
   Q3 <- quantile(sample, 0.75)
   IQR <- Q3 - Q1
