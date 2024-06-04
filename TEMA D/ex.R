@@ -4,7 +4,7 @@ head(data)
 scores <- data$score
 sample_mean <- mean(scores)
 
-variance <- 92.16
+variance <- 69.420
 std_dev <- sqrt(variance) 
 
 n <- length(scores)
@@ -22,6 +22,7 @@ conf_interval_99 <- c(sample_mean - z_99 * std_error,  sample_mean + z_99 * std_
 
 cat("95% Intervalul de incredere e: [", conf_interval_95[1], ", ", conf_interval_95[2], "]\n")
 cat("99% Intervalul de incredere e: [", conf_interval_99[1], ", ", conf_interval_99[2], "]\n")
+
 
 
 #EX D2
@@ -48,14 +49,15 @@ cat("Intervalul de incredere de 95% e: [", conf_int_95[1], ", ", conf_int_95[2],
 cat("Intervalul de incredere de 99% e: [", conf_int_99[1], ", ", conf_int_99[2], "]\n")
 
 
+
 #EX D3
 sample_size <- 100
 num_failures <- 14
 p_hat <- num_failures / sample_size
 
-p0 <- 0.15
+p0 <- 0.15 #probabilitatea (sub ipoteza nula) ca schimbarea nu are loc
 
-# Calcularea valorii Z
+# Calcularea valorii z
 z <- (p_hat - p0) / sqrt((p0 * (1 - p0)) / sample_size)
 
 p_value <- 2 * (1 - pnorm(abs(z)))  
