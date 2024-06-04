@@ -9,7 +9,7 @@ estimate_torus_volume <- function(R, r, num_samples)
   
   inside_torus <- x3^2 + (sqrt(x1^2 + x2^2) - R)^2 < r^2
   
-  proportion_inside <- mean(inside_torus)
+  proportion_inside <- mean(inside_torus) #calculeaza proportia de puncte din interiorul torului
   
   volume_cube <- (2 * R) * (2 * R) * (2 * r)
   
@@ -63,7 +63,7 @@ estimate_triangle_area <- function(num_samples)
   
   area_rectangle <- (b - a) * (d - c)
   
-  estimated_area <- proportion_inside * area_rectangle
+  estimated_area <- proportion_inside * area_rectangle #aproximeaza aria triunghiului, facand prop*aria_dreptunghi_inscris_in_tr
   
   return(estimated_area)
 }
@@ -121,14 +121,14 @@ p <- 0.25
 q <- 0.01
 
 
-simulate_years_until_target <- function(initial_users, n, p, q, target_users)
+simulate_years_until_target <- function(initial_users, nr_yearly_added_users, p, q, target_users) 
 {
   years <- 0
   current_users <- initial_users
   
   while (current_users < target_users) 
   {
-    new_users <- rbinom(1, n, p)
+    new_users <- rbinom(1, nr_yearly_added_users, p)
     retained_users <- rbinom(1, current_users, 1 - q)
     current_users <- retained_users + new_users
     years <- years + 1
@@ -137,8 +137,8 @@ simulate_years_until_target <- function(initial_users, n, p, q, target_users)
   return(years)
 }
 
-set.seed(123) #pt reproductibilitate
-years_to_target <- replicate(num_simulations, simulate_years_until_target(initial_users, n, p, q, target_users))
+set.seed(10000) #pt reproductibilitate
+years_to_target <- replicate(num_simulations, simulate_years_until_target(initial_users, nr_yearly_added_users, p, q, target_users))
 
 mean_years <- mean(years_until_target)
 cat("Nr mediu de ani pana la atingerea targetului de 15000 de utilizatori e:", mean_years, "\n")
