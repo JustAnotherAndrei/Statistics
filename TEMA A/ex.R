@@ -7,7 +7,7 @@ calculeaza_probabilitati <- function(lambda, p, n, m, k)
   if (k < 0 || k >= m || m > n)
   {
     stop("Parametrii trebuie sa satisfaca: 0 <= k < m <= n")
-  }
+  } 
   
   poisson_prob <- dpois(k:m, lambda)
   
@@ -105,7 +105,6 @@ print(results)
 remove_outliers_and_plot <- function(file_path, sample_name) 
 {
   data <- read.table(file_path, header = TRUE)
-  
   if (!(sample_name %in% names(data)))
   {
     stop("Numele esantionului nu e valid.")
