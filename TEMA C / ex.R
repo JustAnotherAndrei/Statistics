@@ -13,38 +13,39 @@ print(generate_random_permutation(5))
 
 
 #b)
-compare_lexicographic <- function(Wi, Wj)
+compare_lexicographic <- function(W1, W2)
   {
-  Lij <- min(nchar(Wi), nchar(Wj))
-  for (l in 1:Lij) {
-    if (substr(Wi, l, l) != substr(Wj, l, l))
+  Lij <- min(nchar(W1), nchar(W2))
+  for (l in 1:Lij)
+  {
+    if (substr(W1, l, l) != substr(W2, l, l))
     {
-      return(substr(Wi, l, l) < substr(Wj, l, l))
+      return(substr(W1, l, l) < substr(W2, l, l))
     }
   }
   
-  if (nchar(Wi) == nchar(Wj))
+  if (nchar(W1) == nchar(W2))
   {
     repeat 
     {
-      random_bit_Wi <- sample(c("0", "1"), 1)
-      random_bit_Wj <- sample(c("0", "1"), 1)
-      Wi <- paste0(Wi, random_bit_Wi)
-      Wj <- paste0(Wj, random_bit_Wj)
-      if (Wi != Wj) 
+      random_bit_W1 <- sample(c("0", "1"), 1)
+      random_bit_W2 <- sample(c("0", "1"), 1)
+      W1 <- paste0(W1, random_bit_W1)
+      W2 <- paste0(W2, random_bit_W2) # daca ..., adauga un bit aleatoriu la fiecare cuvant pana cand sunt diferite
+      if (W1 != W2) 
       {
-        return(Wi < Wj)
+        return(W1 < W2)
       }
     }
   } 
   else 
   {
-    return(nchar(Wi) < nchar(Wj))
+    return(nchar(W1) < nchar(W2))
   }
 }
 
-Wi <- "101"
-Wj <- "100"
+W1 <- "1010"
+W2 <- "1000"
 print(compare_lexicographic(Wi, Wj)) 
 
 
@@ -60,7 +61,7 @@ random_quick_sort <- function(words)
   equal <- words[sapply(words, function(x) x == pivot)]
   greater <- words[sapply(words, function(x) compare_lexicographic(pivot, x))]
   
-  return(c(random_quick_sort(less), equal, random_quick_sort(greater)))
+  return(c(random_quick_sort(less), equal, random_quick_sort(greater))) # returneaza concatenarea recursiva a subverctorilor sortati
 }
 
 words <- c("101", "100", "111", "010", "001")
@@ -76,7 +77,7 @@ generate_random_permutation_words <- function(n, k)
   return(sorted_indices)
 }
 
-set.seed(42)  
+set.seed(77)  
 print(generate_random_permutation_words(5, 3))
 
 
@@ -100,7 +101,7 @@ determine_cut <- function(nodes, edges)
   return(nrow(cut_edges))
 }
 
-set.seed(68)  
+set.seed(56)  
 V <- 1:7
 E <- matrix(c(1,2, 1,3, 2,4, 3,4, 4,5, 5,6, 5,7, 6,7), ncol=2, byrow=TRUE)
 max_cut_cardinality <- determine_cut(V, E)
@@ -122,6 +123,6 @@ find_best_cut <- function(nodes, edges, trials = 1000)
   return(best_cut_size)
 }
 
-best_cut_cardinality <- find_best_cut(V, E, trials = 1000)
+best_cut_cardinality <- find_best_cut(V, E, trials = 2137)
 print(best_cut_cardinality)
 
